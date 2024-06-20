@@ -13,7 +13,6 @@ namespace Core.Interfaces
         /// Асинхронно добавляет новый салон в хранилище.
         /// </summary>
         /// <param name="salon">Салон для добавления.</param>
-        /// <returns>Задача, представляющая операцию добавления.</returns>
         Task AddAsync(Salon salon);
         /// <summary>
         /// Асинхронно получает все салоны из хранилища.
