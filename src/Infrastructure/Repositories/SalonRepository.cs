@@ -9,31 +9,32 @@ using System.Threading.Tasks;
 namespace Infrastructure.Repositories
 {
     /// <summary>
-    /// Репозиторий для работы с данными салонов в базе данных SQLite.
+    /// Репозиторий для работы с данными салона.
     /// </summary>
     public class SalonRepository : ISalonRepository
     {
         private readonly string _connectionString;
+        private SqliteConnection _connection;
 
         /// <summary>
-        /// Конструктор для инициализации репозитория салонов.
+        /// Создает новый экземпляр класса SalonRepository.
         /// </summary>
-        /// <param name="connectionString">Строка подключения к базе данных SQLite.</param>
+        /// <param name="connectionString">Строка подключения к базе данных.</param>
         public SalonRepository(string connectionString)
         {
             _connectionString = connectionString;
+            _connection = new SqliteConnection(_connectionString);
         }
-        /// <summary>
-        /// Асинхронно добавляет новый салон в базу данных.
-        /// </summary>
-        /// <param name="salon">Объект салона для добавления.</param>
-        /// <returns>Задача, представляющая асинхронную операцию добавления.</returns>
 
+        /// <summary>
+        /// Добавляет новый салон в базу данных.
+        /// </summary>
+        /// <param name="salon">Объект салона, который нужно добавить.</param>
+        /// <returns>Задача, завершающаяся после завершения операции добавления.</returns>
         public async Task AddAsync(Salon salon)
         {
-            var connection = new SqliteConnection(_connectionString);
-            await connection.OpenAsync();
-            var command = connection.CreateCommand();
+            await _connection.OpenAsync();
+            var command = _connection.CreateCommand();
             command.CommandText =
                 @"
                 INSERT INTO Salons (ParentIds, ParentIdsWithIt, Name, Discount, HasDependency, Description)
@@ -50,16 +51,15 @@ namespace Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Асинхронно извлекает все салоны из базы данных.
+        /// Получает все салоны из базы данных.
         /// </summary>
-        /// <returns>Список всех салонов.</returns>
+        /// <returns>Задача, завершающаяся список салонов.</returns>
         public async Task<List<Salon>> GetAllAsync()
         {
             var salons = new List<Salon>();
 
-            var connection = new SqliteConnection(_connectionString);
-            await connection.OpenAsync();
-            var command = connection.CreateCommand();
+            await _connection.OpenAsync();
+            var command = _connection.CreateCommand();
             command.CommandText = "SELECT * FROM Salons ORDER BY ParentIdsWithIt";
             var reader = await command.ExecuteReaderAsync();
             while (await reader.ReadAsync())

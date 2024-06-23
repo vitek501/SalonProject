@@ -5,28 +5,56 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Core.Interfaces;
+using Core.UseCases;
 
 
 namespace SalonProject
 {
     class Program
     {
+        private static readonly string _connectionString = "Data Source=salon.db";
         /// <summary>
         /// Точка входа приложения.
         /// </summary>
         static async Task Main()
         {
-            var connectionString = "Data Source=salon.db";
-            var databaseInitializer = new DatabaseInitializer(connectionString);
-
             // Инициализация базы данных
+            var databaseInitializer = new DatabaseInitializer(_connectionString);
             await databaseInitializer.InitializeAsync();
 
-            var salonRepository = new SalonRepository(connectionString);
+            ISalonRepository salonRepository = new SalonRepository(_connectionString);
+            ICalculationRepository calculationRepository = new CalculationRepository(_connectionString);
 
             Console.WriteLine("Список салонов:");
             var salons = await salonRepository.GetAllAsync();
             PrintSalonsWithLevels(salons);
+
+
+            var calculatePriceUseCase = new CalculatePriceUseCase(salonRepository, calculationRepository);
+
+            // Запрос цены у пользователя
+            Console.WriteLine("Введите цену:");
+            var priceInput = Console.ReadLine();
+            if (!double.TryParse(priceInput, out double price))
+            {
+                Console.WriteLine("Неверный формат цены.");
+                return;
+            }
+
+            Console.WriteLine("Введите имя салона:");
+            var salonName = Console.ReadLine();
+
+            try
+            {
+                var finalPrice = await calculatePriceUseCase.CalculatePriceAsync(price, salonName);
+                Console.WriteLine($"Итоговая цена: {finalPrice}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+            }
+
             Console.WriteLine("Нажмите любую клавишу для выхода...");
             Console.ReadKey();
         }

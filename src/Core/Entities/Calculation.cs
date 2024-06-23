@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    internal class Calculation
+    public class Calculation
     {
+        public int Id { get; set; }
+        public double Price { get; set; }
+        public double FinalPrice { get; set; }
+        public double TotalDiscount { get; set; }
+        public string SalonPath { get; set; }
+        public DateTime CalculationDate { get; set; }
     }
 }

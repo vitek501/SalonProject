@@ -47,6 +47,20 @@ namespace Infrastructure.Data
                     ";
                 await createTableCmd.ExecuteNonQueryAsync();
 
+                // Создание таблицы Calculations, если она не существует
+                var createCalculationsTableCmd = connection.CreateCommand();
+                createCalculationsTableCmd.CommandText =
+                    @"
+                    CREATE TABLE IF NOT EXISTS Calculations (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Price REAL NOT NULL,
+                        FinalPrice REAL NOT NULL,
+                        TotalDiscount REAL NOT NULL,
+                        SalonPath TEXT NOT NULL,
+                        CalculationDate TEXT NOT NULL                );
+                ";
+                await createCalculationsTableCmd.ExecuteNonQueryAsync();
+
                 // Проверка наличия данных в таблице Salons
                 var checkCmd = connection.CreateCommand();
                 checkCmd.CommandText = "SELECT COUNT(*) FROM Salons";

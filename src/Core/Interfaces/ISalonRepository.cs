@@ -10,13 +10,12 @@ namespace Core.Interfaces
     public interface ISalonRepository
     {
         /// <summary>
-        /// Асинхронно добавляет новый салон в хранилище.
+        /// Асинхронно добавляет новый салон в бд.
         /// </summary>
         /// <param name="salon">Салон для добавления.</param>
-        /// <returns>Задача, представляющая операцию добавления.</returns>
         Task AddAsync(Salon salon);
         /// <summary>
-        /// Асинхронно получает все салоны из хранилища.
+        /// Асинхронно получает все салоны из бд.
         /// </summary>
         /// <returns>Список всех салонов.</returns>
         Task<List<Salon>> GetAllAsync();
