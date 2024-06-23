@@ -59,6 +59,9 @@
     <PackageReference Include="Microsoft.Data.Sqlite.Core">
       <Version>8.0.6</Version>
     </PackageReference>
+    <PackageReference Include="SQLitePCLRaw.bundle_green">
+      <Version>2.1.8</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
