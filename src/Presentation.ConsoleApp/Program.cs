@@ -14,7 +14,6 @@ namespace SalonProject
     class Program
     {
         private static readonly string _connectionString = "Data Source=salon.db";
-
         /// <summary>
         /// Точка входа приложения.
         /// </summary>
