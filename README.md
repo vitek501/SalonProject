@@ -11,7 +11,7 @@
 
 ## <a id="requirements">Требования</a> 
 
-- .NET SDK 6.0 или выше
+- .NET Core 8.0
 - SQLite
 - NUnit
 
