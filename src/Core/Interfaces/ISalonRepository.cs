@@ -1,12 +1,23 @@
-﻿using System;
+﻿using Core.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    internal class ISalonRepository
+    /// <summary>
+    /// Интерфейс репозитория для работы с салонами.
+    /// </summary>
+    public interface ISalonRepository
     {
+        /// <summary>
+        /// Асинхронно добавляет новый салон в бд.
+        /// </summary>
+        /// <param name="salon">Салон для добавления.</param>
+        Task AddAsync(Salon salon);
+        /// <summary>
+        /// Асинхронно получает все салоны из бд.
+        /// </summary>
+        /// <returns>Список всех салонов.</returns>
+        Task<List<Salon>> GetAllAsync();
     }
 }

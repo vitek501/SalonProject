@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    internal class Salon
+    public class Salon
     {
+        public int Id { get; set; }
+        public int[] ParentIds { get; set; } = Array.Empty<int>();
+        public int[] ParentIdsWithIt { get; set; } = Array.Empty<int>();
+        public string Name { get; set; }
+        public double Discount { get; set; }
+        public bool HasDependency { get; set; }
+        public string Description { get; set; } = string.Empty;
     }
 }
