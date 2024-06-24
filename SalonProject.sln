@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35004.147
@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0CAE76A6-B39
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C44A98C2-37B5-47A9-AFFD-5A94DA4C1A95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{DCEF2B59-3431-4238-9A0C-8FC4225585B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.csproj", "{DCEF2B59-3431-4238-9A0C-8FC4225585B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{D6F533D1-B95E-4160-9B23-45F934ADB235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{D6F533D1-B95E-4160-9B23-45F934ADB235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.ConsoleApp", "src\Presentation.ConsoleApp\Presentation.ConsoleApp.csproj", "{10CDEAE5-71AD-4A27-9896-ECFCD6CFC182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation.ConsoleApp", "src\Presentation.ConsoleApp\Presentation.ConsoleApp.csproj", "{10CDEAE5-71AD-4A27-9896-ECFCD6CFC182}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "test\UnitTest\UnitTest.csproj", "{E687304A-260A-4187-8209-CEF3B14A485A}"
 EndProject

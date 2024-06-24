@@ -17,6 +17,8 @@ namespace SalonProject.Tests
         private ISalonRepository _salonRepository;
         private ICalculationRepository _calculationRepository;
         private CalculatePriceUseCase _calculatePriceUseCase;
+        private string _connectionString;
+        private string _dbPath;
 
         /// <summary>
         /// Метод, выполняемый перед каждым тестом.
@@ -24,13 +26,26 @@ namespace SalonProject.Tests
         [SetUp]
         public async Task SetUp()
         {
-            var connectionString = "Data Source=test.db";
-            var databaseInitializer = new DatabaseInitializer(connectionString);
+            _dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test.db");
+            _connectionString = "Data Source={_dbPath}";
+
+            var databaseInitializer = new DatabaseInitializer(_connectionString);
             await databaseInitializer.InitializeAsync();
 
-            _salonRepository = new SalonRepository(connectionString);
-            _calculationRepository = new CalculationRepository(connectionString);
+            _salonRepository = new SalonRepository(_connectionString);
+            _calculationRepository = new CalculationRepository(_connectionString);
             _calculatePriceUseCase = new CalculatePriceUseCase(_salonRepository, _calculationRepository);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            (_salonRepository as IDisposable)?.Dispose();
+            (_calculationRepository as IDisposable)?.Dispose();
+            if (File.Exists(_dbPath))
+            {
+                File.Delete(_dbPath);
+            }
         }
 
         /// <summary>
